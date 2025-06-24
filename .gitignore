@@ -1,0 +1,66 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+*.env
+
+# Environment variable files
+.env
+.env.*
+
+# macOS-specific files
+.DS_Store
+
+# VS Code settings
+.vscode/
+
+# PyCharm
+.idea/
+
+# Logs and local data
+*.log
+*.sqlite3
+*.db
+*.pid
+*.tgz
+*.bak
+
+# Coverage / test output
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# FastAPI static files
+staticfiles/
+static/
+
+# Local data
+data/
+tmp/
+temp/
+__pypackages__/
+
+# Notebooks (if used)
+.ipynb_checkpoints/
+
+# Jupyter Runtime
+*.nbconvert.ipynb
+
+venv/
+.venv/
+env/
+
+# Ignore ChromaDB local storage
+chroma/
