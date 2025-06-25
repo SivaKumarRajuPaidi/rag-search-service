@@ -1,11 +1,10 @@
 import os
 from dotenv import load_dotenv
 
-from langchain.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.chat_models import ChatOpenAI
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.chains import RetrievalQA
 
 # Load env variables
@@ -14,14 +13,15 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 CHROMA_PATH = os.getenv("CHROMA_PATH", "./chroma_db")
 
 # Embedding model
-embedding_model = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+embedding_model = OpenAIEmbeddings(api_key=OPENAI_API_KEY)
 
 # Vector store initialization (persistent)
 def get_vectorstore():
     return Chroma(
+        collection_name="rag_collection",
         persist_directory=CHROMA_PATH,
         embedding_function=embedding_model
-    )
+        )
 
 # Load and split document
 def process_document(file_path: str):
@@ -36,8 +36,6 @@ def process_document(file_path: str):
 
     vectorstore = get_vectorstore()
     vectorstore.add_documents(chunks)
-    vectorstore.persist()
-
     return {"chunks": len(chunks), "path": file_path}
 
 # Run a RAG query
@@ -51,5 +49,5 @@ def run_query(question: str) -> str:
         retriever=retriever,
         return_source_documents=False
     )
-    result = qa.run(question)
+    result = qa.invoke({"query": question})
     return result
