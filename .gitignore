@@ -64,3 +64,4 @@ env/
 
 # Ignore ChromaDB local storage
 chroma/
+chroma_db/
