@@ -24,7 +24,7 @@ jobs:
 
     - name: Authenticate to Google Cloud
       run: |
-        gcloud auth activate-service-account --key-file="${HOME}/gcloud.json"
+        gcloud auth activate-service-account --key-file="${{ github.workspace }}/gcloud.json"
         gcloud config set project "${{ secrets.GCP_PROJECT_ID }}"
         
     - name: Build and push Docker image
