@@ -37,4 +37,5 @@ jobs:
           --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/rag-search \
           --platform managed \
           --region asia-south1 \
-          --allow-unauthenticated
+          --allow-unauthenticated \
+          --set-env-vars OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }},CHROMA_PATH=./chroma_db
